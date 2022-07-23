@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import {useState} from 'react';
 import './App.css';
-
+import Axios from 'axios';
 function App() {
+  const [from,setFrom]=useState();
+  const [subject,setSubject]=useState();
+  const [textcontent,setTextContent]=useState();
+
+  const sendEmail=()=>{
+    Axios.post('http://localhost:3002/email',({from:from,subject:subject,textcontent:textcontent}))
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <br/><br/>
+      <h2>Contact Me Form:</h2>
+      <br/><br/>
+      <input className='in' style={{width:800}} type='text' onChange={(e)=>{setFrom(e.target.value)}} placeholder='Enter Your Gmail...'/><br/><br/><br/>
+      <input className='in' style={{width:800}} type='text' onChange={(e)=>{setSubject(e.target.value)}} placeholder='Enter Email Subject...'/><br/><br/><br/>
+      <input className='in' style={{width:800}} type='text' onChange={(e)=>{setTextContent(e.target.value)}} placeholder='Enter the TextContent...'/><br/><br/><br/>
+      <button onClick={()=>{sendEmail()}}>Send Email</button>
+      <br/><br/>
+      <br/><br/>
+      <br/><br/>
+      <br/><br/>
+      
     </div>
   );
 }
